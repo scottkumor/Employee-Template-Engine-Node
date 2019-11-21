@@ -1,47 +1,54 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
-const Employee = require("./lib/Employee");
-const constructions = require("./constructions");
+const Manager = require("./lib/Manager");
+const Intern = require("./lib/Intern");
+const Engineer = require("./lib/Engineer");
+const constructions = require('./constructions');
 
-
-function init() {
-
-    inquirer.prompt([
+function init(){
+//take down manager name, email, choose next employee
+inquirer.prompt([
     {
         type: `input`,
-        message: `Please enter the name of the Team Manager`,
-        name: 'mgrName'
-    },
-    {
-        type: 'input',
-        message: 'Enter Manager Email: ',
-        name: 'email'
+        message: `Please enter your name: `,
+        name: 'creator'
     },
     {
         type: 'list',
         name: 'empChoice',
-        message: 'Choose the next Employee Entry:',
+        message: 'Choose the next Employee Entry',
         choices: [
+            //{ value: 'Manager' },
             { value: 'Engineer' },
-            { value: 'Intern' },
+            //{ value: 'Intern' },
+            //{ value: 'Quit and start over?' }
         ]
     }
-    ]).then(function({mgrName, empChoice}) {
-        
+])
+    .then(function ({ creator, empChoice }) {
+
         if (empChoice === "Engineer") {
-            engQuestions();
+            constructions.engQuestions();
         }
-        if (empChoice === "Intern") {
-            intQuestions();
-        }
-        // else {
-        //     inquirer.prompt('Choose a valid employee type')
+        // if (empChoice === "Intern") {
+        //     constructions.intQuestions();
         // }
- });
+        // if (empChoice === "Manager") {
+        //     constructions.mgrQuestions();
+        // }
+        // if (empChoice === "Quit and start over?") {
+        //     init();
+        //}
+    })
+
 }
 
-
 init();
+
+
+
+
+
 
 // fs.writeFile(`team.html`, htmlGen, () => {
 
