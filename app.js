@@ -1,98 +1,57 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
+const Employee = require("./lib/Employee");
+const constructions = require("./constructions");
 
 
+function init() {
 
-
-class Employee {
-    // all base parameters
-    constructor(name, id, title) {
-        this.name = name;
-        this.id = id;
-        this.title = title;
+    inquirer.prompt([
+    {
+        type: `input`,
+        message: `Please enter the name of the Team Manager`,
+        name: 'mgrName'
+    },
+    {
+        type: 'input',
+        message: 'Enter Manager Email: ',
+        name: 'email'
+    },
+    {
+        type: 'list',
+        name: 'empChoice',
+        message: 'Choose the next Employee Entry:',
+        choices: [
+            { value: 'Engineer' },
+            { value: 'Intern' },
+        ]
     }
-
-    getName() {
-        //stuff to get empl name
-    }
-
-    getId() {
-        //stuff to get empl id
-    };
-
-    getEmail() {
-        //stuff to get empl email
-    };
-
-    getRole() {
-        //stuff to get role, Employee
-    };
-}
-
-class Manager extends Employee {
-
-    constructor(officeNumber) {
-        this.officeNumber = officeNumber;
-    }
-
-    getRole() {
-        //overrides to return Manager
-    }
-}
-
-class Engineer extends Employee {
-
-    constructor(github) {
-        this.github = github;
-    }
-
-    getGitHub() {
-        //gets github username
-    }
-    getRole() {
-        //overrides to return Engineer
-    }
-}
-
-class Intern extends Employee {
-
-    constructor(school) {
-        this.school = school;
-    }
-
-    getSchool() {
-        //gets school name
-    }
-    getRole() {
-        //overrides to return Intern
-    }
+    ]).then(function({mgrName, empChoice}) {
+        
+        if (empChoice === "Engineer") {
+            engQuestions();
+        }
+        if (empChoice === "Intern") {
+            intQuestions();
+        }
+        // else {
+        //     inquirer.prompt('Choose a valid employee type')
+        // }
+ });
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+init();
 
 // fs.writeFile(`team.html`, htmlGen, () => {
-               
+
 //         console.log(`team.html written`);
-    
+
 //     return { html: htmlGen }
+// })
+
+// inquirer.prompt({
+//     type: 'input',
+//     message: 'Enter Employee Name: ',
+//     name: 'name'
 // })
