@@ -1,10 +1,3 @@
-var jsdom = require("jsdom");
-const { JSDOM } = jsdom;
-const { window } = new JSDOM();
-const { document } = (new JSDOM('')).window;
-global.document = document;
-
-var $ = jQuery = require('jquery')(window);
 
 const fs = require("fs");
 const inquirer = require("inquirer");
@@ -12,11 +5,9 @@ const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const Engineer = require("./lib/Engineer");
 
-
-empArray = [];
+let empArray = [];
 
 function init() {
-    //take down manager name, email, choose next employee
     inquirer.prompt([
         {
             type: `input`,
@@ -73,10 +64,8 @@ function engQuestions() {
     ]).then(answers => {
         eng = new Engineer(answers.name, answers.id, answers.email, answers.username);
         empArray.push(eng)
-        console.log(empArray)
         newEmp();
     })
-    console.log(empArray)
 }
 
 
@@ -105,7 +94,6 @@ function intQuestions() {
     ]).then(answers => {
         int = new Intern(answers.name, answers.id, answers.email, answers.school);
         empArray.push(int)
-        console.log(empArray)
         newEmp();
     })
 }
@@ -123,7 +111,6 @@ function newEmp() {
             ]
         }
     ]).then(({ empChoice }) => {
-        console.log(empChoice)
         if (empChoice === "Engineer") {
             engQuestions();
         }
@@ -137,17 +124,15 @@ function newEmp() {
 }
 
 
-
-
 function htmlCreate() {
 
     let htmlString = "";
 
     const htmlHead =
-        `
-<!DOCTYPE html>
-<html lang="en">
-<head>
+    `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -155,19 +140,55 @@ function htmlCreate() {
     <link rel="stylesheet" type="text/css" href="./assets/css/layout.css" />
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
     <title>The Dream Team</title>
-</head>
-<body>
+    </head>
+
+    <body>
+        <div class="d-f df-fdc">
+            <div class="ta-r fz-jjj ts-i ts-b mt-m mr-l p-s s">
+                The Dream Team
+            </div>
+            <div class="ta-l ml-l mt-m p-s s">
+        `;
+
+        let htmlFooter =
+        `
+            </div>
+        </div>
+    </body>
+
+    </html>
     `;
 
-    let htmlFooter = `
-</body>
-</html>
-`
+    let cardWrapper = '';
+    let newDiv = '';
+    let specialAtt = '';
 
-let cardWrapper = '';
-    empArray.forEach(element => {
-        console.log(element)
-        newDiv = `<div class="">${element}</div>`;
+    empArray.forEach(emp => {
+        newDivHead = `
+        <div class="s">           
+            <div class="">${emp.getRole()}</div>
+            <div class="">${emp.name}</div>
+            <div class="">${emp.id}</div>
+            <div class="">${emp.email}</div>
+        `
+        if (emp.getRole() === "Manager"){
+            specialAtt = `<div class="">${emp.getOfficeNumber()}</div>`
+            newDivHead += specialAtt;
+        }
+        if (emp.getRole() === "Engineer"){
+            specialAtt = `<div class="">${emp. getGithub()}</div>`
+            newDivHead += specialAtt;
+        }
+        if (emp.getRole() === "Intern"){
+            specialAtt = `<div class="">${emp.getSchool()}</div>`
+            newDivHead += specialAtt;
+        }
+        
+        
+        newDivFoot= `</div>`
+                    
+        newDiv = newDivHead + newDivFoot;
+
         cardWrapper += newDiv
     })
 
