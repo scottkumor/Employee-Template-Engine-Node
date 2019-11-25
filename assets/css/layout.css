@@ -119,28 +119,6 @@
 .w-h {width: 50%;}
 .w-75v {width: 75%;}
 
-
-.i-fl {
-    max-height: 500px;
-    max-width: 500px;
-    min-height: 500px;
-    min-width: 500px;
-  }
-
-  .i-fm {
-    max-height: 150px;
-    max-width: 150px;
-    min-height: 150px;
-    min-width: 150px;
-  }
-
-  .i-fs {
-    max-height: 25px;
-    max-width: 25px;
-    min-height: 25px;
-    min-width: 25px;
-  }
-
   /* margin: large, medium, small */
   .m-l {margin: 5%;}
   .m-m {margin: 3%;}
@@ -160,7 +138,7 @@
   /* min-height: auto, full, full viewport */
   .mnh-a {min-height: auto;}
   .mnh-f {min-height: 100%;}
-  .mnh-fv {min-height: 100vh;}
+  .mnh-100v {min-height: 100vh;}
 
   /* min width: auto, full, full viewport, 40% */
   .mnw-a {min-width: auto;}

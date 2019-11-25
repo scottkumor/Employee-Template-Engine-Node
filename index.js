@@ -139,15 +139,17 @@ function htmlCreate() {
     <link rel="stylesheet" type="text/css" href="./assets/css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="./assets/css/layout.css" />
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+    <script src="https://kit.fontawesome.com/9963762e2c.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
     <title>The Dream Team</title>
     </head>
 
-    <body>
+    <body id="pageWrapper" class="bgc-4 mnh-100v">
         <div class="d-f df-fdc">
-            <div class="ta-r fz-jjj ts-i ts-b mt-m mr-l p-s s">
+            <div class="ta-r c-1 bgc-3 fz-jjj ts-i ts-b mt-m mr-l p-m s">
                 The Dream Team
             </div>
-            <div class="ta-l ml-l mt-m p-s s">
+            <div class="ta-l ml-l mt-m bgc-3 p-s s">
         `;
 
         let htmlFooter =
@@ -155,35 +157,42 @@ function htmlCreate() {
             </div>
         </div>
     </body>
-
+    
     </html>
     `;
 
     let cardWrapper = '';
     let newDiv = '';
     let specialAtt = '';
+    let icon = '';
 
     empArray.forEach(emp => {
+        if (emp.getRole() === "Manager"){icon = `<i class="c-0 p-s fa-2x fas fa-briefcase"></i>`}
+        if (emp.getRole() === "Engineer"){icon = `<i class="c-0 p-s fa-2x fas fa-keyboard"></i>`}
+        if (emp.getRole() === "Intern"){icon = `<i class="c-0 p-s fa-2x fas fa-portrait"></i>`}
+
         newDivHead = `
-        <div class="s">           
-            <div class="">${emp.getRole()}</div>
-            <div class="">${emp.name}</div>
-            <div class="">${emp.id}</div>
-            <div class="">${emp.email}</div>
+        <div class="m-m p-s bgc-1 c-4 d-f df-fdc s">           
+            <div class="d-f bgc-4 ai-c">    
+                ${icon}
+                <div class=" c-0 p-s fz-jj">${emp.getRole()}: ${emp.name}</div>
+            </div>
+            <div class="p-s fz-j">ID: ${emp.id}</div>
+            <div class="p-s fz-j">Email: ${emp.email}</div>
         `
+
         if (emp.getRole() === "Manager"){
-            specialAtt = `<div class="">${emp.getOfficeNumber()}</div>`
+            specialAtt = `<div class="p-s fz-j">Office Phone Number: ${emp.getOfficeNumber()}</div>`
             newDivHead += specialAtt;
         }
         if (emp.getRole() === "Engineer"){
-            specialAtt = `<div class="">${emp. getGithub()}</div>`
+            specialAtt = `<div class="p-s fz-j"> GitHub Username: ${emp. getGithub()}</div>`
             newDivHead += specialAtt;
         }
         if (emp.getRole() === "Intern"){
-            specialAtt = `<div class="">${emp.getSchool()}</div>`
+            specialAtt = `<div class="p-s fz-j">School: ${emp.getSchool()}</div>`
             newDivHead += specialAtt;
         }
-        
         
         newDivFoot= `</div>`
                     
@@ -193,8 +202,6 @@ function htmlCreate() {
     })
 
     htmlString = htmlHead + cardWrapper + htmlFooter;
-
-
 
 
     fs.writeFile(`team.html`, htmlString, () => {
