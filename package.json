@@ -23,7 +23,7 @@
   "dependencies": {
     "feather-icons": "^4.24.1",
     "inquirer": "^6.5.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jsdom": "^15.2.1"
   },
   "devDependencies": {
