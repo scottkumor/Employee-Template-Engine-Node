@@ -24,7 +24,7 @@
     "feather-icons": "^4.24.1",
     "inquirer": "^6.5.2",
     "jquery": "^3.4.1",
-    "jsdom": "^15.2.1"
+    "jsdom": "^16.5.0"
   },
   "devDependencies": {
     "jest": "^24.9.0"
